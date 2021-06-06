@@ -1,0 +1,69 @@
+plugins {
+    id 'groovy'
+    id 'org.jetbrains.intellij' version '0.7.3'
+    id 'org.jetbrains.kotlin.jvm' version '1.5.0'
+}
+
+group 'com.madhavth.flutter_cubit_plugin'
+version '1.0.4-SNAPSHOT'
+
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.codehaus.groovy:groovy-all:3.0.5'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation "com.fleshgrinder.kotlin:case-format:0.2.0"
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version '202.7660.26'
+    type 'IC'
+    plugins = ['com.intellij.java']
+}
+
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+//patchPluginXml {
+//    changeNotes """
+//      Cubit, Ui generator code for default network requests\n
+//      added functionality to add blocprovider to main.dart (requires MyApp() widget or MultiBlocProvider() widget to work\n
+//      if model provided then creates repository and adds repository data call to generated cubit class\n
+//      if api url provided then adds to repository url call (searches for constants.dart in lib/ folder if doesnt exist creates one)\n
+//      \n
+//      This plugin assumes you already have flutter_bloc, get_it and equatable installed, so install them if you haven't already to utilize this plugin to the fullest efficiency\n
+//      """
+//}
+
+test {
+    useJUnitPlatform()
+}
+
+publishPlugin {
+    token = System.getenv("ORG_GRADLE_PROJECT_intellijPublishToken")
+}
+
+task downloadDependencies(type: Exec) {
+    configurations.testRuntime.files
+    commandLine 'echo', 'Downloaded all dependencies'
+}

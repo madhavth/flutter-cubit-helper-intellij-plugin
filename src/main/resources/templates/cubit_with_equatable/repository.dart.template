@@ -1,0 +1,22 @@
+import 'package:dio/dio.dart';
+import '../utils/constant.dart';
+import 'package:get_it/get_it.dart';
+import '../models/${MODEL}.dart';
+
+class ${MODEL}Repository {
+    final Dio _dio = GetIt.instance<Dio>();
+
+    ${MODEL}Repository();
+
+    Future<${MODEL}> getData() async {
+        try{
+            final response = await _dio.get(Api.${ALL_CAPS_MODEL});
+            return ${MODEL}.fromJson(response.data);
+        }
+
+        catch(e)
+        {
+            rethrow;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class ${cubit_pascal_case}LoadedScreen extends StatelessWidget {
+   final data;
+
+  const ${cubit_pascal_case}LoadedScreen({Key? key, required this.data}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container()
+    );
+  }
+}

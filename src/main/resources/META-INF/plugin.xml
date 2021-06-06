@@ -1,0 +1,37 @@
+<idea-plugin>
+    <id>com.madhavth.flutter_cubit_plugin</id>
+    <name>Flutter Cubit Generator Helper</name>
+    <vendor email="madhavth77@gmail.com">powermt</vendor>
+
+    <description>flutter_bloc code generator helper, can generate BlocBuilder Code, add BlocProvider to main.dart and has functionality to add default Repository class and add its implementation to the cubit class</description>
+
+    <change-notes>
+    Initial release
+    </change-notes>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <intentionAction>
+            <className>com.madhavth.flutter_cubit_plugin.intention_action.BlocWrapWithMultiBlocProviderIntentionAction</className>
+            <category>Bloc</category>
+        </intentionAction>
+    </extensions>
+
+    <actions>
+        <action class="com.madhavth.flutter_cubit_plugin.action.GenerateCubitAction"
+                description="Generate a new Cubit / Repository"
+                id="GenerateCubitRepositoryId"
+                icon="/icons/cubit.png"
+                text="Cubit/Repository Class">
+
+            <add-to-group
+                group-id="NewGroup"
+                anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>

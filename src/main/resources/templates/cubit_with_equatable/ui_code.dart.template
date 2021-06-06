@@ -1,0 +1,42 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/${cubit_snake_case}/${cubit_snake_case}_cubit.dart';
+import '${cubit_snake_case}_loaded_screen.dart';
+import '../extra/loading.dart';
+import '../extra/error_screen.dart';
+
+class ${cubit_pascal_case}Screen extends StatelessWidget {
+  const ${cubit_pascal_case}Screen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<${cubit_pascal_case}Cubit, ${cubit_pascal_case}State>(
+        builder: (context, state)
+    {
+      if(state is ${cubit_pascal_case}LoadedState)
+        {
+          return ${cubit_pascal_case}LoadedScreen(data: state.data);
+        }
+      else if(state is ${cubit_pascal_case}LoadingState)
+        {
+          return LoadingIndicator();
+        }
+
+      else if(state is ${cubit_pascal_case}InitialState)
+        {
+          return Scaffold();
+        }
+
+      else if(state is ${cubit_pascal_case}ErrorState)
+        {
+          return ErrorScreen(message: state.error);
+        }
+
+      return Center(child: Text(
+        kDebugMode?"state not implemented $state": ""
+      ));
+    });
+  }
+}

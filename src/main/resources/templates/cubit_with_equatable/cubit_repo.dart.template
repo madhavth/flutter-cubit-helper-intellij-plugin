@@ -1,0 +1,30 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import '../../repository/${MODEL_SNAKE_CASE}_repository.dart';
+import '../../models/${MODEL}.dart';
+import '../../utils/error_helper.dart';
+
+part '${cubit_snake_case}_state.dart';
+
+class ${cubit_pascal_case}Cubit extends Cubit<${cubit_pascal_case}State> {
+  ${cubit_pascal_case}Cubit() : super(${cubit_pascal_case}InitialState())
+  {
+    fetchData();
+  }
+
+  final _${MODEL_SNAKE}Repository =  ${MODEL}Repository();
+
+  ${MODEL}? data;
+
+  Future<void> fetchData() async {
+    try{
+        emit(${cubit_pascal_case}LoadingState());
+        data = await _${MODEL_SNAKE}Repository.getData();
+        emit(${cubit_pascal_case}LoadedState(data));
+    }
+    catch(e)
+    {
+       emit(${cubit_pascal_case}ErrorState(ErrorHelper.getErrorMessage(e)));
+    }
+  }
+}
